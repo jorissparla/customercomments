@@ -28,12 +28,29 @@ const DateBox = glamorous.div({
   fontSize: 18
 });
 
-const TextBox = glamorous(TextField)({
+const TextBox1 = glamorous(TextField)({
   display: 'flex',
-  width: '75%',
+  width: '500px',
   marginLeft: 80,
   fontFamily: 'Verdana'
 });
+const TextBox = glamorous.textarea({
+  display: 'flex',
+  width: '100%',
+  marginLeft: 10,
+  resize: 'none',
+  fontFamily: 'Roboto',
+  fontSize: 14,
+  boxSizing: 'border-box',
+  border: '2px solid #ccc',
+  borderRadius: 5,
+  transition: '0.5s',
+  fontFamily: 'Verdana',
+  '&:focus': {
+    border: '2px solid #555'
+  }
+});
+
 const Row = glamorous.div({
   display: 'flex',
   flexDirection: 'row',
@@ -149,7 +166,6 @@ export default class CustomerNotes extends React.Component {
 
   render() {
     const { notes } = this.props;
-    console.log(notes);
     const months = this.sortAndReturnMonthNames(notes);
     console.log(months);
     return (
@@ -161,6 +177,7 @@ export default class CustomerNotes extends React.Component {
           <Row>
             {this.state.changeDateFieldvisible &&
               <Input
+                autoOk={true}
                 value={this.state.dateValue}
                 onChange={this.onChangeDate}
               />}
@@ -195,6 +212,7 @@ export default class CustomerNotes extends React.Component {
                 </MonthTitle>
                 {notes
                   .filter(note => moment(note.date).format('MMMM') === month)
+                  .sort((a, b) => (a.date > b.date ? -1 : 1))
                   .map((note, index) =>
                     <Note note={note} key={note.id} onDelete={this.onDelete} />
                   )}

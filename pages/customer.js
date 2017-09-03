@@ -10,7 +10,6 @@ class DetailPage extends React.Component {
     const { customers } = this.props.data;
     this.props
       .createCustomerNote({ customerId: customers[0].id, note, date })
-      //.then(Router.push(`/customer/?id=${customers[0].id}`))
       .then(this.props.data.refetch())
       .catch(e => console.log('error'));
   };

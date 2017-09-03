@@ -9,30 +9,27 @@ import glamorous from 'glamorous';
 
 const A = glamorous.a({
   padding: 10,
-  color: 'white'
+  color: 'white',
+  fontSize: 24,
+  marginRight: 15,
+  textDecoration: 'none'
 });
 
 export default ({ pathname }) =>
   <header>
-    <Toolbar style={{ color: 'white', backgroundColor: 'rgb(51, 157, 242)' }}>
+    <Toolbar
+      style={{ color: 'white', backgroundColor: '#01579B', fontSize: 24 }}
+    >
       <Link prefetch href="/">
-        <A className={pathname === '/' && 'is-active'}>Home</A>
+        <A>Home</A>
       </Link>
-      <Link prefetch href="/about">
-        <A className={pathname === '/about' && 'is-active'}>About</A>
+      <Link prefetch href="/about?id=1">
+        <A>About</A>
       </Link>
 
       <style jsx>{`
         header {
           margin-bottom: 25px;
-        }
-        a {
-          font-size: 14px;
-          margin-right: 15px;
-          text-decoration: none;
-        }
-        .is-active {
-          text-decoration: underline;
         }
       `}</style>
     </Toolbar>

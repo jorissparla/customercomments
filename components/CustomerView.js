@@ -17,7 +17,8 @@ const Container = glamorous.div({
 });
 
 const ColorPaper = glamorous(Paper)({
-  backgroundColor: '#EEEEEE'
+  backgroundColor: '#EEE',
+  displayName: 'ColorPaper'
 });
 const Together = glamorous.div({
   display: 'flex',
@@ -36,7 +37,7 @@ class Customer extends React.Component {
     console.log(ColorPaper.style);
     const { customer } = this.props;
     return (
-      <ColorPaper style={{ backgroundColor: '#EEEEEE' }}>
+      <ColorPaper style={{ background: '#F5F5F5' }}>
         <form action="">
           <Container>
             <Together>
@@ -51,8 +52,7 @@ class Customer extends React.Component {
                 value={customer.name}
                 fullWidth={true}
               />
-            </Together>
-            <Together>
+
               <Avatar src={customer.followed.picture.data} />
               <SuperTextField
                 floatingLabelText="FollowedBy"
