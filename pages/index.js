@@ -11,9 +11,14 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { withState } from 'recompose';
 import CustomerList from '../components/CustomerList';
+const auth = require('../lib/authenticate');
+
+const authResult = auth();
+
+console.log(authResult);
 
 const enhance = withState('searchText', 'setSearchText', '');
-const Index = enhance(({ searchText, setSearchText }) =>
+const Index = enhance(({ searchText, setSearchText }) => (
   <Page>
     <SearchBar
       onChange={setSearchText}
@@ -21,6 +26,6 @@ const Index = enhance(({ searchText, setSearchText }) =>
     />
     <CustomerList filter={searchText} />
   </Page>
-);
+));
 
 export default Index;

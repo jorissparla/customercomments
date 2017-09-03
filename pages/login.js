@@ -2,25 +2,29 @@ import React, { Component } from 'react';
 import { gql, graphql, compose } from 'react-apollo';
 import Router from 'next/router';
 import Page from '../components/Page';
-import { Input, Row, Form, Button, ErrorText } from '../lib/shared';
+import { Input, Row, Form, Button, ErrorText, H1 } from '../lib/shared';
+import jwt from 'jwt-simple';
+import config from '../lib/config';
 
 class Login extends Component {
   state = { email: '', password: '', error: '' };
 
   render() {
-    console.log('props', this.props);
     return (
-      <Form action="submit">
+      <Form>
+        <H1>Login</H1>
         <Row>
           <Input
             type="text"
-            placholder="email"
+            name="js-email"
+            placeholder="Enter email address"
             onChange={e => this.setState({ email: e.target.value })}
             value={this.state.email}
           />
           <Input
+            name="js-password"
             type="password"
-            placholder="email"
+            placeholder="Enter password"
             onChange={e => this.setState({ password: e.target.value })}
             value={this.state.password}
           />
@@ -32,7 +36,7 @@ class Login extends Component {
   }
 
   _login = async () => {
-    console.log('ha');
+    this.setState({ error: '' });
     const { email, password } = this.state;
     let result;
     try {
@@ -43,11 +47,14 @@ class Login extends Component {
         }
       });
     } catch (e) {
-      return this.setState({ error: JSON.stringify(e, null, 2) });
+      return this.setState({ error: 'Invalid email/password' });
     }
 
     const { data: { signinUser: { token, user } } } = result;
-    console.log(token, user);
+    console.log(config.secret);
+    const decoded = jwt.decode(token, config.secret);
+    console.log('decoded', decoded);
+    localStorage.setItem('token', token);
     localStorage.setItem('user-name', user.fullname);
     localStorage.setItem('user-id', user.id);
     //localStorage.setItem('user-picture', user.picture.data);

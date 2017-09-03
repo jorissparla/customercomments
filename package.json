@@ -7,11 +7,14 @@
     "start": "next start"
   },
   "dependencies": {
+    "babel-plugin-styled-components": "^1.2.0",
     "checksum": "^0.1.1",
+    "date-fns": "^1.28.5",
     "glamor": "^3.0.0-3",
     "glamorous": "^3.23.5",
     "graphql": "^0.9.3",
     "isomorphic-fetch": "^2.2.1",
+    "jwt-simple": "^0.5.1",
     "material-ui": "^0.18.5",
     "moment": "^2.18.1",
     "next": "latest",
@@ -23,7 +26,8 @@
     "react-redux": "^5.0.6",
     "react-tap-event-plugin": "^2.0.1",
     "recompose": "^0.23.5",
-    "redux-form": "^7.0.3"
+    "redux-form": "^7.0.3",
+    "styled-components": "^2.1.2"
   },
   "now": {
     "name": "customercomments"
